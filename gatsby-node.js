@@ -1,7 +1,12 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+exports.createPages = async ({ actions: {createPage}}) => {
+    const allUsers = ['1', '3'];
 
-// You can delete this file if you're not using it
+    // creates Pages that lists all posts of a particular user
+    allUsers.forEach((userID) => {
+        createPage({
+            path: `/posts/user${userID}/`,
+            component: require.resolve('./src/templates/userPostsTemplate.jsx'),
+            context: {userID},
+        });
+    });
+};
